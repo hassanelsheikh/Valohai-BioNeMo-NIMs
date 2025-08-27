@@ -1,0 +1,7 @@
+- step:
+    name: load_data
+    image: nvcr.io/nvidia/clara/bionemo-framework:1.3
+    environment: pro-trial-prod-oci-vm-gpu-a10-1
+    command:
+      - pip install -r requirements.txt
+      - python prepare-data.py
