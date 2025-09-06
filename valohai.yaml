@@ -5,3 +5,27 @@
     command:
       - pip install -r requirements.txt
       - python prepare-data.py
+- step:
+    name: predict_properties
+    image: nvcr.io/nvidia/clara/bionemo-framework:nightly
+    environment: pro-trial-prod-oci-vm-gpu-a10-1
+    command:
+      - pip install -r requirements.txt
+      - python predict-properties.py
+    environment-variables:
+      - name: WORK_DIR
+        default: "/valohai/outputs/esm2_inference_tutorial"
+        description: Working directory for the inference step
+    inputs:
+      - name: dataset
+        default: "datum://0198ec30-9989-43b3-e4ed-992a3b1a6d9f"
+    parameters:
+      - name: num_gpus
+        type: integer
+        default: 1
+      - name: precision
+        type: string
+        default: fp16
+      - name: micro-batch-size
+        type: integer
+        default: 8
