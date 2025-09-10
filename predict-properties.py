@@ -3,10 +3,11 @@ import warnings
 import subprocess, sys, os
 
 import pandas as pd
-import torch
+import json
 from bionemo.core.data.load import load
 import argparse
 import valohai
+
 
 warnings.filterwarnings("ignore")
 warnings.simplefilter("ignore")
@@ -90,3 +91,24 @@ if __name__ == "__main__":
         raise RuntimeError(f"infer_esm2 failed with code {process.returncode}")
     else:
         print("Inference finished. Results are in:", results_path)
+
+    # Zip the results directory
+    output_zip_path = valohai.outputs().path("esm2_results")
+    shutil.make_archive(output_zip_path, 'zip', results_path)
+
+    print(f"Results zipped to: {output_zip_path}.zip")
+
+    # Save Valohai metadata
+    metadata = {
+        "esm2_results.zip": {
+            "valohai.dataset-versions": [
+                 "dataset://esm2_results/version1"
+             ],
+        }
+    }
+
+    metadata_path = valohai.outputs().path("valohai.metadata.jsonl")
+    with open(metadata_path, "w") as outfile:
+        for file_name, file_metadata in metadata.items():
+            json.dump({"file": file_name, "metadata": file_metadata}, outfile)
+            outfile.write("\n")    
