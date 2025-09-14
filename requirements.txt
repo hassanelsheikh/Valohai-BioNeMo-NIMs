@@ -2,3 +2,4 @@ valohai-utils
 torch
 pandas
 bionemo-core
+transformers
