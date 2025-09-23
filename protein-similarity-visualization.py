@@ -8,6 +8,7 @@ import pandas as pd
 import argparse
 import os
 import shutil
+import glob
 
 
 def parse_args():
@@ -17,7 +18,7 @@ def parse_args():
     return parser.parse_args()
 
 
-def find_topk_similar(X, output_path, query_idx=0, topk=5):
+def find_topk_similar(X: np.ndarray, output_path: str, query_idx: int = 0, topk: int = 5):
     """
     Find the top-k most similar proteins to a given query using cosine similarity,
     and save results as a CSV.
@@ -45,7 +46,7 @@ def find_topk_similar(X, output_path, query_idx=0, topk=5):
     
     return df
 
-def plot_embeddings_pca(X, output_path, query_idx=0):
+def plot_embeddings_pca(X: np.ndarray, output_path: str, query_idx: int = 0):
     """
     Create a 2D PCA scatter plot of protein embeddings.
 
@@ -83,8 +84,16 @@ if __name__ == "__main__":
     shutil.unpack_archive(data_archive, extract_dir, format='zip')
     print(f"Dataset extracted to: {extract_dir}")
 
-    # Load your output
-    pt = torch.load(os.path.join(extract_dir, "predictions__rank_0.pt"), map_location="cpu")
+    # Find and load the .pt file
+    pt_files = glob.glob(os.path.join(extract_dir, "*.pt"))
+    if not pt_files:
+        raise FileNotFoundError(f"No .pt files found in {extract_dir}")
+    if len(pt_files) > 1:
+        print(f"Warning: Multiple .pt files found, using the first one: {pt_files[0]}")
+    
+    pt_file = pt_files[0]
+    print(f"Loading embeddings from: {os.path.basename(pt_file)}")
+    pt = torch.load(pt_file, map_location="cpu")
     embs = pt["embeddings"]   # [N, D] or [N, L, D]
 
     # Pool if per-residue embeddings
