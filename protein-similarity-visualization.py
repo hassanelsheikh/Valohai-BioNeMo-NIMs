@@ -107,7 +107,9 @@ if __name__ == "__main__":
     topk_similarities_path = valohai.outputs("my-output").path("topk_similarities.csv")
 
     # Find top-k similar proteins and save to CSV
-    find_topk_similar(X, output_path=topk_similarities_path, query_idx=args.query_idx, topk=args.topk)
+    find_topk_similar(X, output_path=topk_similarities_path,
+                        query_idx=args.query_idx,
+                         topk=args.topk)
 
     pca_plot_path = valohai.outputs("my-output").path("embeddings_pca.png")
 

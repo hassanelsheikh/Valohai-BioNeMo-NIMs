@@ -1,12 +1,18 @@
 import json
 import shutil
-
+from typing import Dict, Any
 import valohai
 from bionemo.data import UniRef50Preprocess
 
 
 def prepare_uniref_dataset(source: str, output_dir: str):
+    """
+    Prepare UniRef50 dataset using BioNeMo preprocessing.
 
+    Args:
+        source (str): Dataset source (e.g., "uniprot").
+        output_dir (str): Directory where processed dataset will be stored.
+    """
     data = UniRef50Preprocess()
     data.prepare_dataset(
         source=source,
@@ -31,7 +37,7 @@ if __name__ == "__main__":
     shutil.make_archive(val_zipped_path, 'zip', "/valohai/outputs/uniref50/val")
 
     # Save Valohai metadata
-    metadata = {
+    metadata: Dict[str, Dict[str, Any]] = {
         "uniref50_train.zip": {
             "valohai.dataset-versions": [
                  "dataset://uniref50/version1"
@@ -49,9 +55,8 @@ if __name__ == "__main__":
         }
     }
 
-    metadata_path = valohai.outputs().path("valohai.metadata.jsonl")
+    metadata_path: str = valohai.outputs().path("valohai.metadata.jsonl")
     with open(metadata_path, "w") as outfile:
         for file_name, file_metadata in metadata.items():
             json.dump({"file": file_name, "metadata": file_metadata}, outfile)
             outfile.write("\n")
-

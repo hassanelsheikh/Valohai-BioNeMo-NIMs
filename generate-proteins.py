@@ -18,11 +18,11 @@ if __name__ == "__main__":
     args = parse_args()
     protgpt2 = pipeline('text-generation', model="nferruz/ProtGPT2")
     sequences = protgpt2("<|endoftext|>",
-                            max_length=args.max_length,
-                            do_sample=True, top_k=args.top_k,
-                            repetition_penalty=args.repetition_penalty,
-                            num_return_sequences=args.num_return_sequences,
-                            eos_token_id=args.eos_token_id)
+                        max_length=args.max_length,
+                        do_sample=True, top_k=args.top_k,
+                        repetition_penalty=args.repetition_penalty,
+                        num_return_sequences=args.num_return_sequences,
+                        eos_token_id=args.eos_token_id)
     
     # Create dataframe and save to CSV
     df = pd.DataFrame(sequences)
