@@ -39,7 +39,8 @@ The Valohai pipeline automates the complete workflow:
 ### 1. **Load Data**
 
 * Uses BioNeMo framework container (`nvcr.io/nvidia/clara/bionemo-framework:1.3`)
-* Prepares dataset and outputs zipped files
+* Converts UniRef50 dataset to FASTA
+* Splits the dataset for training, validation and testing
 
 ---
 
