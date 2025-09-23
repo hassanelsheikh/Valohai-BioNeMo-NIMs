@@ -5,7 +5,7 @@ import valohai
 from bionemo.data import UniRef50Preprocess
 
 
-def prepare_uniref_dataset(source, output_dir):
+def prepare_uniref_dataset(source: str, output_dir: str):
 
     data = UniRef50Preprocess()
     data.prepare_dataset(
