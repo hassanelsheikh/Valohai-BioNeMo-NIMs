@@ -1,10 +1,10 @@
-import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
 import math
-import valohai
 import os
-import pandas as pd
 
+import pandas as pd
+import torch
+import valohai
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
 model_name = "nferruz/ProtGPT2"
 tokenizer = AutoTokenizer.from_pretrained(model_name)

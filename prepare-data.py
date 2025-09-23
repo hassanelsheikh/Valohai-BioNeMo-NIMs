@@ -1,7 +1,9 @@
-from bionemo.data import UniRef50Preprocess
-import shutil
 import json
+import shutil
+
 import valohai
+from bionemo.data import UniRef50Preprocess
+
 
 def prepare_uniref_dataset(source, output_dir):
 

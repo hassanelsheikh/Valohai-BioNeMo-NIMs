@@ -1,13 +1,14 @@
+import argparse
+import json
+import os
 import shutil
+import subprocess
+import sys
 import warnings
-import subprocess, sys, os
 
 import pandas as pd
-import json
-from bionemo.core.data.load import load
-import argparse
 import valohai
-
+from bionemo.core.data.load import load
 
 warnings.filterwarnings("ignore")
 warnings.simplefilter("ignore")

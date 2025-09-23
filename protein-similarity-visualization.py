@@ -1,14 +1,15 @@
-import torch
-import numpy as np
-from sklearn.metrics.pairwise import cosine_similarity
-from sklearn.decomposition import PCA
-import matplotlib.pyplot as plt
-import valohai
-import pandas as pd
 import argparse
+import glob
 import os
 import shutil
-import glob
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import torch
+import valohai
+from sklearn.decomposition import PCA
+from sklearn.metrics.pairwise import cosine_similarity
 
 
 def parse_args():

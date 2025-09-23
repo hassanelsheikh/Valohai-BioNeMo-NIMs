@@ -1,7 +1,9 @@
-from transformers import pipeline
 import argparse
-import pandas as pd
 import os
+
+import pandas as pd
+from transformers import pipeline
+
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Generate protein sequences using ProtGPT2 model.')

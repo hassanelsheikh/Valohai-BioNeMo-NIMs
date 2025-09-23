@@ -1,6 +1,8 @@
-import os, glob
-from transformers import AutoModelForCausalLM, AutoTokenizer
+import glob
+import os
+
 import valohai
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
 
 def already_safe(model_dir: str) -> bool:
