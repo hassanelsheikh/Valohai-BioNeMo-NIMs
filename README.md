@@ -145,7 +145,7 @@ This will:
 3. Generate new protein sequences
 4. Evaluate sequence quality
 5. Visualize similarities
-6. Deploy models into NIM for production use
+6. Deploy models into NIM for production use (Requires user approval)
 
 ---
 
