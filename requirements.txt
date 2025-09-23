@@ -1,4 +1,4 @@
-valohai-utils
-pandas
-bionemo-core
-transformers
+bionemo-core==2.4.5
+pandas==2.2.3
+transformers==4.53.3
+valohai-utils==0.7.0
