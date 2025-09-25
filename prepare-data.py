@@ -3,7 +3,12 @@ import shutil
 from typing import Dict, Any
 import valohai
 from bionemo.data import UniRef50Preprocess
+import argparse
 
+def parse_args():
+    parser = argparse.ArgumentParser(description='Prepare UniRef50 dataset using BioNeMo preprocessing.')
+    parser.add_argument('--data_version', type=str, default='v1.0', help='Version of the dataset to use when saving preprocessed data.')
+    return parser.parse_args()
 
 def prepare_uniref_dataset(source: str, output_dir: str):
     """
@@ -22,6 +27,8 @@ def prepare_uniref_dataset(source: str, output_dir: str):
 
 
 if __name__ == "__main__":
+    args = parse_args()
+
     prepare_uniref_dataset(
         source="uniprot",
         output_dir="/valohai/outputs/uniref50",
@@ -40,17 +47,17 @@ if __name__ == "__main__":
     metadata: Dict[str, Dict[str, Any]] = {
         "uniref50_train.zip": {
             "valohai.dataset-versions": [
-                 "dataset://uniref50/version1"
+                 f"dataset://uniref50/{args.data_version}"
              ],
         },
         "uniref50_test.zip": {
             "valohai.dataset-versions": [
-                "dataset://uniref50/version1"
+                f"dataset://uniref50/{args.data_version}"
             ],
         },
         "uniref50_val.zip": {
             "valohai.dataset-versions": [
-                "dataset://uniref50/version1"
+                f"dataset://uniref50/{args.data_version}"
             ],
         }
     }
